@@ -19,7 +19,7 @@ message CodeChallenge {
     Methods Method = 2;
 }
 
-message AuthRequest {
+message Request {
     string ID = 1;
     string ACR  = 2;
     repeated string AMR = 3;
