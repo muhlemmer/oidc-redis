@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+
+  dev:
+    build:
+      context: .
+    ports:
+      - 127.0.0.1:7000:6060
+    networks:
+      - db
+    volumes:
+      - ..:/workspace/oidc-redis:cached
+      - ${HOME}/.ssh:/home/vscode/.ssh
+      - ${HOME}/.netrc:/home/vscode/.netrc:ro
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+
+  redis:
+    image: redis:latest
+    networks:
+      - db
+
+networks:
+  db:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.11.0/24
