@@ -1,0 +1,38 @@
+syntax = "proto3";
+/*
+protoc --go_out=. --go_opt=paths=source_relative internal/model/model.proto
+*/
+
+package model;
+option go_package = "github.com/muhlemmer/oidc-redis/internal/model";
+
+import "google/protobuf/timestamp.proto";
+
+message CodeChallenge {
+    string Challenge = 1;
+
+    enum Methods {
+        plain = 0;
+        S256 = 1;
+    }
+
+    Methods Method = 2;
+}
+
+message AuthRequest {
+    string ID = 1;
+    string ACR  = 2;
+    repeated string AMR = 3;
+    repeated string Audience = 4;
+    google.protobuf.Timestamp AuthTime = 5;
+    string ClientID = 6;
+    CodeChallenge CodeChallenge = 7;
+    string Nonce = 8;
+    string RedirectURI = 9;
+    string ResponseType = 10;
+    string ResponseMode = 11;
+    repeated string Scopes = 12;
+    string State = 13;
+    string Subject = 14;
+    bool Done = 15;
+}
