@@ -5,7 +5,6 @@ import (
 
 	"github.com/muhlemmer/oidc-redis/internal/model"
 	"github.com/zitadel/oidc/pkg/oidc"
-	"github.com/zitadel/oidc/pkg/op"
 )
 
 // Request implements both AuthRequest and RefreshTokenRequest,
@@ -43,7 +42,3 @@ func (req *Request) Done() bool {
 func (req *Request) SetCurrentScopes(scopes []string) {
 	req.Scopes = scopes
 }
-
-// implementation check
-func _() op.AuthRequest         { return new(Request) }
-func _() op.RefreshTokenRequest { return new(Request) }
